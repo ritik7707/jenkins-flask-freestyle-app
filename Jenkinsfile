@@ -39,12 +39,12 @@ pipeline {
         }
 
         stage('Health Check') {
-            steps {
+             steps {
                 bat '''
-                    powershell -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $ok=$false; for($i=0; $i -lt 12; $i++){ try { $r=Invoke-WebRequest -UseBasicParsing http://127.0.0.1:5001/health -TimeoutSec 3; if($r.StatusCode -eq 200){ Write-Host $r.Content; $ok=$true; break } } catch { Write-Host 'Waiting for application health...'; Start-Sleep -Seconds 5 } }; if(-not $ok){ & $env:DOCKER logs jenkins-flask-pipeline-ap }"
+                    powershell -NoProfile -ExecutionPolicy Bypass -Command "$ErrorActionPreference='Stop'; $ok=$false; for($i=0; $i -lt 12; $i++){ try { $r=Invoke-WebRequest -UseBasicParsing http://127.0.0.1:5001/health -TimeoutSec 3; if($r.StatusCode -eq 200){ Write-Host $r.Content; $ok=$true; break } } catch { Write-Host 'Waiting for application health...'; Start-Sleep -Seconds 5 } }; if(-not $ok){ & $env:DOCKER logs jenkins-flask-pipeline-app; exit 1 }"
                 '''
-            }
-        }
+    }
+}
 
         stage('Deployment Verification') {
             steps {
