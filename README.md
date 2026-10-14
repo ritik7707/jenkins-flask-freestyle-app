@@ -74,3 +74,9 @@ endlocal
 - Make sure port `5000` is free. If it is already in use, change the host-side port in `-p 5000:5000`, for example `-p 5001:5000`, and browse to that host port.
 - This is a learning demo. The script replaces the named container after the image builds successfully. For production deployment, use health checks and a rollback strategy.
 - For a public GitHub repository, credentials may not be needed to clone. Do not put passwords or access tokens directly in the build script.
+
+
+
+## Jenkins Poll SCM Test
+
+Verified automatic Jenkins pipeline triggering through periodic GitHub repository polling.
